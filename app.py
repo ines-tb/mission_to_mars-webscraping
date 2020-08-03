@@ -23,9 +23,10 @@ def index():
 @app.route("/scrape")
 def scrape():
    mars = mongo.db.mars
-   marsData = scraping.scrape_all()
+   marsData = scraping.scrapeAll()
    mars.update({}, marsData, upsert=True)
    return "Scraping Successful!"
 
+#%%
 if __name__ == "__main__":
    app.run()
