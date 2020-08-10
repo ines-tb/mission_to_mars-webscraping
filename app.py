@@ -27,6 +27,22 @@ def scrape():
    mars.update({}, marsData, upsert=True)
    return render_template("scrape.html")
 
+@app.route("/hemispheres/<title>")
+def hemisphere1(title):
+   
+   mars = mongo.db.mars.find_one()
+   url = None
+   if title == mars["hemisphere1_title"]:
+      url = mars["hemisphere1_url"]
+   elif title == mars["hemisphere2_title"]:
+      url = mars["hemisphere2_url"]
+   elif title == mars["hemisphere3_title"]:
+      url = mars["hemisphere3_url"]
+   elif title == mars["hemisphere4_title"]:
+      url = mars["hemisphere4_url"]
+
+   return render_template("hemisphere.html", title=title,url=url,mars=mars )
+
 #%%
 if __name__ == "__main__":
    app.run()

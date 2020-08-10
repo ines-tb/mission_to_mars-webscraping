@@ -24,7 +24,6 @@ def scrapeAll():
       "news_paragraph": newsParagraph,
       "featured_image": featuredImage(browser),
       "facts": marsFacts(),
-      "hemispheres": hemispheres,
       "hemisphere1_url": hemispheres[0]["img_url"],
       "hemisphere1_title": hemispheres[0]["title"],
       "hemisphere2_url": hemispheres[1]["img_url"],
