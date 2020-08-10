@@ -25,7 +25,7 @@ def scrape():
    mars = mongo.db.mars
    marsData = scraping.scrapeAll()
    mars.update({}, marsData, upsert=True)
-   return "Scraping Successful!"
+   return render_template("scrape.html")
 
 #%%
 if __name__ == "__main__":
