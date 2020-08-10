@@ -24,6 +24,7 @@ def scrapeAll():
       "news_paragraph": newsParagraph,
       "featured_image": featuredImage(browser),
       "facts": marsFacts(),
+      "hemispheres": hemispheres,
       "hemisphere1_url": hemispheres[0]["img_url"],
       "hemisphere1_title": hemispheres[0]["title"],
       "hemisphere2_url": hemispheres[1]["img_url"],
@@ -145,15 +146,14 @@ def getHemispheres(browser):
             browser.visit(imgUrl)
             html = browser.html
             imgSoup = soup(html, 'html.parser')
-            partialUrl = "https://astrogeology.usgs.gov"
             try:
                 imgDivWrapper = imgSoup.find('div', class_='container')
-                imgUrlRel = imgDivWrapper.select_one('div.wide-image-wrapper img').get("src")
-
-            except Exception as e:
+                downloadsDiv = imgDivWrapper.select_one('div.wide-image-wrapper div.downloads')
+                fullImage = downloadsDiv.select_one('ul li a').get("href")
+            except:
                 return None
 
-            return f"{partialUrl}{imgUrlRel}"
+            return fullImage
 
         for imgDict in imgList:
             imgDict["img_url"] = getFullImageUrl(browser, imgDict["url_to_visit"])
